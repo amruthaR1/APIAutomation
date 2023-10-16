@@ -5,10 +5,14 @@ const baseURL = require("../../data/baseURL.json");
 const EndPoint = require("../../data/endPoints.json");
 const token = require("../../data/authorizationToken.json");
 const assertionData = require("../../data/assertData.json");
+const createUser = require("../../utils/createUser");
 
 describe("Update User", () => {
+  before(async () => {
+    user = await createUser();
+  });
   it("should update user data", async () => {
-    const authToken = token.updateUserToken;
+    const authToken = user.token;
     const config = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
@@ -21,9 +25,9 @@ describe("Update User", () => {
       config
     );
 
-    expect(response.status).to.be.equal(200)
-    expect(response.data._id).to.be.equal("652cdc68a1304d0013421512");
-    expect(response.data.firstName).to.be.equal(data.firstName)
+    expect(response.status).to.be.equal(200);
+    expect(response.data._id).to.be.equal(user.user._id);
+    expect(response.data.firstName).to.be.equal(data.firstName);
   });
 
   it("Should get error message when wrong token provided", async () => {
@@ -34,7 +38,8 @@ describe("Update User", () => {
     const data = { firstName: "amr" };
     try {
       const response = await axios.patch(
-        baseURL.BaseURL + EndPoint.UserEndpoint.GetUser,data,
+        baseURL.BaseURL + EndPoint.UserEndpoint.GetUser,
+        data,
         config
       );
       expect(response.status).to.be.equal(
