@@ -4,7 +4,8 @@ const expect = chai.expect;
 const baseURL = require("../data/baseURL.json");
 const userEndPoint = require("../data/endPoints.json");
 const testData = require("../data/testData.json");
-const assertionData = require("../data/assertData.json")
+const assertionData = require("../data/assertData.json");
+const randomUserGenerator = require("../utils/randomUserGenerator")
 
 
 describe("Add User", () => {
@@ -29,17 +30,14 @@ describe("Add User", () => {
   });
 
   it("should add a user", async ()=>{
-    const payload = {
-      firstName: "Test",
-      lastName: "User",
-      email: "Test1.User1@gamil.com",
-      password: "myPassword",
-    };
-
-    const postResponse = await axios.post(baseURL.baseURL+userEndPoint.AddUser, payload);
-    console.log(postResponse.data);
-    expect(postResponse.status).to.be.equal(201);
-    expect(postResponse.data.user.firstName).to.be.equal('Test');
+    const randomUser = randomUserGenerator()
+    const postResponse = await axios.post(
+      baseURL.BaseURL + userEndPoint.AddUser,
+      randomUser
+    );
+    expect(postResponse.status).to.be.equal(assertionData.AddUserSuccess.ErrorStatus);
+    expect(postResponse.data.user.firstName).to.be.equal(randomUser.firstName);
+    expect(postResponse.data.user.lastName).to.be.equal(randomUser.lastName);
     
   })
 });
