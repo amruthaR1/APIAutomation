@@ -2,6 +2,7 @@
     "UserEndpoint":{
       "AddUser": "/users",
       "GetUser":"/users/me",
-      "PatchUser":"/users/me"
+      "PatchUser":"/users/me",
+      "LogOut":"/users/logout"
     }
 }
