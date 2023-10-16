@@ -3,6 +3,7 @@
       "AddUser": "/users",
       "GetUser":"/users/me",
       "PatchUser":"/users/me",
-      "LogOut":"/users/logout"
+      "LogOut":"/users/logout",
+      "LogIn":"/users/login"
     }
 }

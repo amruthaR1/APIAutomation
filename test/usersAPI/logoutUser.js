@@ -8,7 +8,7 @@ const token = require("../../data/authorizationToken.json");
 
 describe('Logout User', () => {
     it('Should logout the user', async()=>{
-        const authToken = token.CorrectToken;
+        const authToken = token.Token.CorrectToken;
         const config = {
           headers: { Authorization: `Bearer ${authToken}` },
         };

@@ -9,7 +9,7 @@ const assertionData = require("../../data/assertData.json");
 
 describe("Get User", () => {
   it("should get an already existing user", async () => {
-    const authToken = token.CorrectToken;
+    const authToken = token.Token.CorrectToken;
     const config = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
@@ -25,7 +25,7 @@ describe("Get User", () => {
   });
 
   it("Should get error message when wrong token provided", async () => {
-    const authToken = token.IncorrectToken;
+    const authToken = token.Token.IncorrectToken;
     const config = {
       headers: { Authorization: `Bearer ${authToken}` },
     };

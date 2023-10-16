@@ -3,9 +3,9 @@ const chai = require("chai");
 const expect = chai.expect;
 const baseURL = require("../../data/baseURL.json");
 const EndPoint = require("../../data/endPoints.json");
-const token = require("../../data/authorizationToken.json");
 const assertionData = require("../../data/assertData.json");
 const createUser = require("../../utils/createUser");
+const token = require('../../data/authorizationToken.json')
 
 describe("Update User", () => {
   before(async () => {
@@ -31,7 +31,7 @@ describe("Update User", () => {
   });
 
   it("Should get error message when wrong token provided", async () => {
-    const authToken = token.IncorrectToken;
+    const authToken = token.Token.IncorrectToken;
     const config = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
@@ -42,6 +42,7 @@ describe("Update User", () => {
         data,
         config
       );
+  
       expect(response.status).to.be.equal(
         assertionData.GetUser.Fail.ErrorStatus
       );
