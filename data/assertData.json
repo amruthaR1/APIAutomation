@@ -1,0 +1,10 @@
+{
+    "AddUserFail":{
+        "ErrorStatus":400,
+        "ErrorMessage":"Email address is already in use"
+    },
+    "AddUserSuccess":
+    {
+        "ErrorStatus" :201
+    }
+}
