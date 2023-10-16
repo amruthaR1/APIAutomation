@@ -5,4 +5,11 @@
       "email": "xavier.lucas@gmail.com",
       "password": "myPassword"
     }
+,
+    "UpdateUser":{
+      "_id": "652cdc68a1304d0013421512",
+      "firstName": "Update",
+      "lastName": "User",
+      "email": "update1.user@hotmail.com"
+    }
 }

@@ -1,6 +1,7 @@
 {
     "UserEndpoint":{
       "AddUser": "/users",
-      "GetUser":"/users/me"
+      "GetUser":"/users/me",
+      "PatchUser":"/users/me"
     }
 }
