@@ -1,3 +1,6 @@
 {
-    "AddUser":"/users"
+    "UserEndpoint":{
+      "AddUser": "/users",
+      "GetUser":"/users/me"
+    }
 }

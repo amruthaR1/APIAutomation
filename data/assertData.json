@@ -1,10 +1,20 @@
 {
-    "AddUserFail":{
-        "ErrorStatus":400,
-        "ErrorMessage":"Email address is already in use"
+  "AddUser": {
+    "Fail": {
+      "ErrorStatus": 400,
+      "ErrorMessage": "Email address is already in use"
     },
-    "AddUserSuccess":
-    {
-        "ErrorStatus" :201
+    "Success": {
+      "SuccessStatus": 201
     }
+  },
+  "GetUser":{
+    "Fail": {
+      "ErrorStatus": 401,
+      "ErrorMessage": "Please authenticate."
+    },
+    "Success":{
+        "SuccessStatus":200
+    }
+  }
 }

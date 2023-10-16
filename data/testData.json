@@ -1,8 +1,8 @@
 {
     "AlreadyExistingUser":{
-      "firstName": "Test",
-      "lastName": "User",
-      "email": "test@fake.com",
+      "firstName": "Xavier",
+      "lastName": "Lucas",
+      "email": "xavier.lucas@gmail.com",
       "password": "myPassword"
     }
 }
