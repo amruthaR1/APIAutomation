@@ -5,8 +5,12 @@ const baseURL = require("../../data/baseURL.json");
 const EndPoint = require("../../data/endPoints.json");
 const token = require("../../data/authorizationToken.json");
 const assertionData = require("../../data/assertData.json");
+const createContact = require("../../utils/contacts/createContacts");
 
 describe("Get contact", () => {
+  before(async () => {
+    contact = await createContact();
+  });
   it("Sholud get a contact", async () => {
     const authToken = token.Token.CorrectToken;
     const config = {
@@ -15,11 +19,12 @@ describe("Get contact", () => {
     const response = await axios.get(
       baseURL.BaseURL +
         EndPoint.ContactEndPoint.GetContact +
-        "652e0ef1fde4e500139b9650",
+        contact._id,
       config
     );
     expect(response.status).to.be.equal(200);
     expect(response.data).to.be.an("object");
+    expect(response.data.firstName).to.be.equal(contact.firstName);
   });
 
   it("Should get error message when wrong token provided", async () => {
@@ -31,7 +36,7 @@ describe("Get contact", () => {
       const response = await axios.get(
         baseURL.BaseURL +
           EndPoint.ContactEndPoint.GetContact +
-          "652e0ef1fde4e500139b9650",
+          contact._id,
         config
       );
     } catch (error) {
