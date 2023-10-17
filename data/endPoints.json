@@ -8,6 +8,8 @@
     "DeleteUser": "/users/me"
   },
   "ContactEndPoint":{
-    "AddContact":"/contacts"
+    "AddContact":"/contacts",
+    "GetContactList":"/contacts"
+
   }
 }
