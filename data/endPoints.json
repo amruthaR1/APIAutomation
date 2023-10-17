@@ -11,7 +11,8 @@
     "AddContact":"/contacts",
     "GetContactList":"/contacts",
     "GetContact":"/contacts/",
-    "updateContact":"/contacts/"
+    "updateContact":"/contacts/",
+    "DeleteContact":"/contacts/"
 
   }
 }
