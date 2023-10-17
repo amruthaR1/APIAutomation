@@ -9,7 +9,9 @@
   },
   "ContactEndPoint":{
     "AddContact":"/contacts",
-    "GetContactList":"/contacts"
+    "GetContactList":"/contacts",
+    "GetContact":"/contacts/",
+    "updateContact":"/contacts/"
 
   }
 }
