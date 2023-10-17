@@ -24,6 +24,22 @@ describe("Delete contact", () => {
     expect(response.data).to.be.equal("Contact deleted");
   });
 
+  it("should get error message when wrong contact id provided", async () => {
+    const authToken = token.Token.CorrectToken;
+    const config = {
+      headers: { Authorization: `Bearer ${authToken}` },
+    };
+    try {
+      const response = await axios.get(
+        baseURL.BaseURL + EndPoint.ContactEndPoint.DeleteContact + "123456",
+        config
+      );
+    } catch (error) {
+      expect(error.response.status).to.be.equal(400);
+      expect(error.response.data).to.be.equal("Invalid Contact ID");
+    }
+  });
+
   it("Should get error message when wrong token provided", async () => {
     const authToken = token.Token.IncorrectToken;
     const config = {
