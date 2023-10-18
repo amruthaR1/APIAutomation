@@ -6,7 +6,7 @@ class PostMethod {
   constructor() {
     this.url = baseURL.BaseURL + EndPoint.UserEndpoint.AddUser;
     this.failureStatus = 400;
-    this.failureMessage = "Please authenticate.";
+    this.failureMessage = "Email address is already in use";
     this.successStatus = 201;
   }
 
