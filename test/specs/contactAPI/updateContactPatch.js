@@ -1,27 +1,28 @@
-const axios = require("axios");
 const chai = require("chai");
 const expect = chai.expect;
-const baseURL = require("../../data/baseURL.json");
-const EndPoint = require("../../data/endPoints.json");
-const token = require("../../data/authorizationToken.json");
-const assertionData = require("../../data/assertData.json");
-const createContact = require("../../utils/contacts/createContacts");
+const UPDATEAPI = require("../../pageobjects/contactsObject/updateContactAPI");
+const token = require("../../../data/authorizationToken.json");
+const assertionData = require("../../../data/assertData.json");
+const createContact = require("../../../utils/contacts/createContacts");
 
-describe("Delete contact", () => {
+describe("Update contact", () => {
+  const data = { firstName: "amr" };
   before(async () => {
     contact = await createContact();
   });
-  it("Sholud delete a contact", async () => {
+  it("Sholud update a contact", async () => {
     const authToken = token.Token.CorrectToken;
     const config = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
-    const response = await axios.delete(
-      baseURL.BaseURL + EndPoint.ContactEndPoint.DeleteContact + contact._id,
+    const response = await UPDATEAPI.makeUpdaterequest(
+      contact._id,
+      data,
       config
     );
-    expect(response.status).to.be.equal(200);
-    expect(response.data).to.be.equal("Contact deleted");
+    expect(response.status).to.be.equal(UPDATEAPI.getSuccessStatus());
+    expect(response.data).to.be.an("object");
+    expect(response.data.firstName).to.be.equal(data.firstName);
   });
 
   it("should get error message when wrong contact id provided", async () => {
@@ -30,13 +31,14 @@ describe("Delete contact", () => {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     try {
-      const response = await axios.get(
-        baseURL.BaseURL + EndPoint.ContactEndPoint.DeleteContact + "123456",
+      const response = await UPDATEAPI.makeUpdaterequest(
+        (contactId = "123456"),
+        data,
         config
       );
     } catch (error) {
-      expect(error.response.status).to.be.equal(400);
-      expect(error.response.data).to.be.equal("Invalid Contact ID");
+      expect(error.response.status).to.be.equal(UPDATEAPI.getFailureStatus());
+      expect(error.response.data).to.be.equal(UPDATEAPI.getFailureMessage());
     }
   });
 
@@ -46,8 +48,9 @@ describe("Delete contact", () => {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     try {
-      const response = await axios.delete(
-        baseURL.BaseURL + EndPoint.ContactEndPoint.DeleteContact + contact._id,
+      const response = await UPDATEAPI.makeUpdaterequest(
+        contact._id,
+        data,
         config
       );
     } catch (error) {

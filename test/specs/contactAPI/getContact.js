@@ -1,11 +1,9 @@
-const axios = require("axios");
 const chai = require("chai");
 const expect = chai.expect;
-const baseURL = require("../../data/baseURL.json");
-const EndPoint = require("../../data/endPoints.json");
-const token = require("../../data/authorizationToken.json");
-const assertionData = require("../../data/assertData.json");
-const createContact = require("../../utils/contacts/createContacts");
+const GETSINGLECONTACT = require("../../pageobjects/contactsObject/getContactAPI");
+const token = require("../../../data/authorizationToken.json");
+const assertionData = require("../../../data/assertData.json");
+const createContact = require("../../../utils/contacts/createContacts");
 
 describe("Get contact", () => {
   before(async () => {
@@ -16,11 +14,11 @@ describe("Get contact", () => {
     const config = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
-    const response = await axios.get(
-      baseURL.BaseURL + EndPoint.ContactEndPoint.GetContact + contact._id,
+    const response = await GETSINGLECONTACT.makeGetSingleContactRequest(
+      contact._id,
       config
     );
-    expect(response.status).to.be.equal(200);
+    expect(response.status).to.be.equal(GETSINGLECONTACT.getSuccessStatus());
     expect(response.data).to.be.an("object");
     expect(response.data.firstName).to.be.equal(contact.firstName);
   });
@@ -31,13 +29,17 @@ describe("Get contact", () => {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     try {
-      const response = await axios.get(
-        baseURL.BaseURL + EndPoint.ContactEndPoint.GetContact + "123456",
+      const response = await GETSINGLECONTACT.makeGetSingleContactRequest(
+        (contactId = "12345"),
         config
       );
     } catch (error) {
-      expect(error.response.status).to.be.equal(400);
-      expect(error.response.data).to.be.equal("Invalid Contact ID");
+      expect(error.response.status).to.be.equal(
+        GETSINGLECONTACT.getFailureStatus()
+      );
+      expect(error.response.data).to.be.equal(
+        GETSINGLECONTACT.getFailureMessage()
+      );
     }
   });
 
@@ -47,8 +49,8 @@ describe("Get contact", () => {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     try {
-      const response = await axios.get(
-        baseURL.BaseURL + EndPoint.ContactEndPoint.GetContact + contact._id,
+      const response = await GETSINGLECONTACT.makeGetSingleContactRequest(
+        contact._id,
         config
       );
     } catch (error) {
